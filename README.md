@@ -13,11 +13,7 @@ Status: Currently Being Tested in DEV.
 
 ## Abstract:
 
-Under construction: The intention for this is to log, track and configure email alerts from Python applications. With the email subscription model and a configuration area for if a recipient wants to receive all emails ie successful/fail/warn or fail/warn or just fail notifications.
-
-Note: This is a stand alone capable solution architected to be modular, elastic and fluid and thus able to be migrated easily regardless of cloud platform. With a dependency on a relational database engine and python 3.9 or higher.
-
-## Python Libraries
+Under construction: The intention for this is to log, track and configure email alerts from SQL applications. With the email subscription model and a configuration area for if a recipient wants to receive all emails ie successful/fail/warn or fail/warn or just fail notifications.
 
 
 ## Relation DB Objects
@@ -57,7 +53,7 @@ Note: This is a stand alone capable solution architected to be modular, elastic 
 
 ### Example pyApplication Email Prep 
 declare @OUTVAL varchar(max)
-exec pyAlerts..[uP_prepEmail] 
+exec SQLAlert..[uP_prepEmail] 
 	 @EMAILGROUP = 'ALAN_TEST'
 	,@subj = 'test subject'
 	,@msg = ' test message '
@@ -72,7 +68,7 @@ select *
 			on a.sid = b.sid
 
 ### Example pyApplication email log update
-exec pyAlerts..uP_updtEmailLog
+exec SQLAlert..uP_updtEmailLog
 	 @EMAIL_MID = 1
 	,@STATUS_ID = 3
 	,@ret_msg = ' TEST WHERE THE ERROR CODE WILL BE STORED'
@@ -90,8 +86,8 @@ select distinct a.mid MessageID, a.daterec, a.datesent, a.sender, a.recipients, 
 		join pyEmailImportance d
 			on a.gid = d.gid
 		-- Allows for email groups to be associated with applications
-		cross apply pyAlerts.dbo.fn_RetDelimValTbl('~', d.aids) e
-			join pyAlerts..pyEmailApplications f on e.retVals = f.aid --and c.rowid = e.rowid
+		cross apply SQLAlert.dbo.fn_RetDelimValTbl('~', d.aids) e
+			join SQLAlert..pyEmailApplications f on e.retVals = f.aid --and c.rowid = e.rowid
 		-- Add where clause as needed
 ```
 
@@ -104,5 +100,5 @@ Under construction
 ## Project files
 | Type | File name | Description |
 | ----- | ------ | ------ |
-| SQL | pyAlerts.sql | pyAlerts DB Objects |
+| SQL | SQLAlert.sql | SQLAlert DB Objects |
 
