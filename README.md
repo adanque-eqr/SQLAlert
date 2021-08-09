@@ -54,11 +54,6 @@ Under construction: The intention for this is to log, track and configure email 
 | fn_RetDelimValTbl | Tokenizing text function | 
 | fn_VariableValueToTableSession | Session ID Message Management | 
 
-### Workflow:
-
-- 1. Python application calls, "uP_prepEmail" to get email recipients using group name along with if the recipient wants to receive success / fail&warn / or just failures
-
-- 2. After python app sends email, it calls, "uP_updtEmailLog" to update the email log
 
 - Server: DEVSQL08 (currently)
 
