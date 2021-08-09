@@ -139,6 +139,6 @@ Changing database objects to refer to the SQLAlert email procs vs the EQRDBA.
 | TSQL | ALERT_TESTING.sql | | 
 | TSQL | ALERT_TRANSFER_EQRDBA_ALERT_GROUP_MEMBERS.sql | | 
 | TSQL | Create SQLAlert DB.sql | | 
-| TSQL | README.md | | 
-| TSQL | SQLAlert.cs | | 
-| TSQL | sqlalert.exe | | 
+| MD | README.md | | 
+| C# | SQLAlert.cs | | 
+| EXE | sqlalert.exe | | 
