@@ -72,34 +72,43 @@ exec SQLAlert..[uP_prepEmail]
 	,@OUTVAL = @OUTVAL OUTPUT
 select @OUTVAL 
 
-### Review 
-select * 
-	from pyEmailLog a
-		join pyEmailStatus b
-			on a.sid = b.sid
-
-### Example pyApplication email log update
-exec SQLAlert..uP_updtEmailLog
-	 @EMAIL_MID = 1
-	,@STATUS_ID = 3
-	,@ret_msg = ' TEST WHERE THE ERROR CODE WILL BE STORED'
-
-### Review Queries
+### Usage Queries
 ```
-select distinct a.mid MessageID, a.daterec, a.datesent, a.sender, a.recipients, a.subj, a.msg, b.statusname, a.ret_msg, c.groupname
-		-- Add if would like to see associated applications
-		-- , f.appname
-	from pyEmailLog a
-		join pyEmailStatus b
-			on a.sid = b.sid
-		join pyEmailGroups c
-			on a.gid = c.gid
-		join pyEmailImportance d
-			on a.gid = d.gid
-		-- Allows for email groups to be associated with applications
-		cross apply SQLAlert.dbo.fn_RetDelimValTbl('~', d.aids) e
-			join SQLAlert..pyEmailApplications f on e.retVals = f.aid --and c.rowid = e.rowid
-		-- Add where clause as needed
+Steps to set recipient criticality level per sql email group.
+	
+While adding sqlalert members.
+
+	 -- 	To add PERSONs to alert
+	 exec SQLALERT..sp_AddAlertPERSON @FULLNAME ='Alan Danque', @EMAILADDR ='adanque@eqr.com'
+	exec SQLALERT..sp_AddAlertPERSON @FULLNAME ='Alan Danque', @EMAILADDR ='adanque@gmail.com'
+
+	 -- 	To add group to alert 
+	 exec SQLALERT..sp_AddAlertGroup @GROUPNAME ='ALAN_TEST'
+
+	 -- 	To add group member
+	 exec SQLALERT..sp_AddAlertGroupMember @EMAILADDRess ='adanque@eqr.com', @GROUPNAME ='ALAN_TEST', @TYPEID = 1 --Types are 1 = to, 2 = cc, 3 = bcc
+	 exec SQLALERT..sp_AddAlertGroupMember @EMAILADDRess ='adanque@gmail.com', @GROUPNAME ='ALAN_TEST', @TYPEID = 1 --Types are 1 = to, 2 = cc, 3 = bcc
+			,@CRITICALITY_LEVEL = 1 -- 4 all, 2 warn, 1 fail/error
+
+
+Update existing SQLAlert members
+
+-- Review SQLAlert email group membership.
+select a.PERSON, a.EMAILADDR, c.groupname, b.* 
+from SQLALERT..ALERT_NOTIF_PERSONS a 
+	join SQLALERT..ALERT_NOTIF_GROUP_MEMBERS b on a.id = b.pid 
+	join SQLALERT..ALERT_NOTIF_GROUPS c on c.id = b.GID 
+order by c.groupname desc
+
+-- Update membership based on expected type of email -- 4 all emails, 2 warn, 1 fail/error
+Update b set b.cid = 1  --(This sets the type of emails to send to only Failures / Errors)
+	from SQLALERT..ALERT_NOTIF_PERSONS a 
+		join SQLALERT..ALERT_NOTIF_GROUP_MEMBERS b on a.id = b.pid 
+		join SQLALERT..ALERT_NOTIF_GROUPS c on c.id = b.GID 
+	where a.emailaddr = 'adanque@gmail.com'
+		and c.groupname = 'ALAN_TEST'
+
+
 ```
 
 ## Servers
