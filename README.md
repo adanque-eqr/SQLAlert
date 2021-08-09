@@ -38,9 +38,15 @@ Under construction: The intention for this is to log, track and configure email 
 ### Stored Procedures:
 | Object Name | Purpose |
 | ----- | ------ | 
-| uP_pyAlert_getNextID | Sequence Management | 
-| uP_prepEmail | Starts Email Log and obtains intended email recipients based on group | 
-| uP_updtEmailLog | Updates Email Log status after alert execution |
+
+| SP_ALERT_GETNEXTID | Manages Table IDs | 
+| SP_TSQLRETINTVAL | Parses int values within txt| 
+| sp_GetCurrentDefaultEmail | Get next email type after verifying default | 
+| sp_SQLAlert | Email Notification entry sproc | 
+| sp_AddAlertPerson | Adds recipient to framework | 
+| sp_AddAlertGroup | Adds groups to framework | 
+| sp_AddAlertGroupMember | Adds membership to framework | 
+| sp_CreateJobNotificationAlert | Creates email notification | 
 
 ### Functions:
 | Object Name | Purpose |
