@@ -52,6 +52,8 @@ Under construction: The intention for this is to log, track and configure email 
 | Object Name | Purpose |
 | ----- | ------ | 
 | fn_RetEmailNHow | Obtains list of intended email addresses by group |
+| fn_RetDelimValTbl | Tokenizing text function | 
+| fn_VariableValueToTableSession | Session ID Message Management | 
 
 ### Workflow:
 
