@@ -91,14 +91,54 @@ select distinct a.mid MessageID, a.daterec, a.datesent, a.sender, a.recipients, 
 		-- Add where clause as needed
 ```
 
-## Python
-- Server: EQRAPP07
+## Servers
+- Server: All Dev SQL Servers
 Under construction
 
+## Deployment steps.
+To Deploy:
+
+
+1. Download and copy the sqlalert.exe to the target sql server local C:\Scripts\CSMail\ folder.
+
+
+2. Connect to the target SQL Server and execute the following scripts in the order noted.
+  a. Create SQLAlert DB.sql  (note may need to modify the target data and log drive names to align with target SQL Server.)
+  b. ALERT_TABLES.sql
+  c. ALERT_SPROCS.sql
+  d. ALERT_FUNCTIONS.sql
+  e. ALERT_TRANSFER_EQRDBA_ALERT_GROUP_MEMBERS.sql
+
+ 
+## Test steps.
+Execute the following command within SSMS.
+
+1. exec sp_SQLAlert
+    @GROUPNAME = 'DBA'
+    ,@SUBJECT= 'TEST SUBJECT PLS IGNORE' 
+    ,@MESSAGE= 'TEST MESSAGE '
+
+2. Validate the email was recorded into the ALERT_MESSAGES table.
+pls execute the query: 
+
+select top 100 * from EQRDBA..ALERT_MESSAGES (nolock) order by id desc
+
+
+
+Not in scope: 
+Changing current SQL Job Notifications to swap the EQRDBA with SQLAlert databases.
+Changing database objects to refer to the SQLAlert email procs vs the EQRDBA.
 
 
 ## Project files
 | Type | File name | Description |
 | ----- | ------ | ------ |
-| SQL | SQLAlert.sql | SQLAlert DB Objects |
-
+| TSQL | ALERT_FUNCTIONS.sql | | 
+| TSQL | ALERT_SPROCS.sql | | 
+| TSQL | ALERT_TABLES.sql | | 
+| TSQL | ALERT_TESTING.sql | | 
+| TSQL | ALERT_TRANSFER_EQRDBA_ALERT_GROUP_MEMBERS.sql | | 
+| TSQL | Create SQLAlert DB.sql | | 
+| TSQL | README.md | | 
+| TSQL | SQLAlert.cs | | 
+| TSQL | sqlalert.exe | | 
