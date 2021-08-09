@@ -38,7 +38,6 @@ Under construction: The intention for this is to log, track and configure email 
 ### Stored Procedures:
 | Object Name | Purpose |
 | ----- | ------ | 
-
 | SP_ALERT_GETNEXTID | Manages Table IDs | 
 | SP_TSQLRETINTVAL | Parses int values within txt| 
 | sp_GetCurrentDefaultEmail | Get next email type after verifying default | 
