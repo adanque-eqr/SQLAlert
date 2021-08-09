@@ -20,16 +20,20 @@ Under construction: The intention for this is to log, track and configure email 
 ### Tables:
 | Table Name | Purpose |
 | ----- | ------ | 
-| pyEmailSequences | Sequence management |
-| pyEmailStatus | Status id lookup | 
-| pyEmailLog | Email Historical Log | 
-| pyEmailGroups | Email Group | 
-| pyEmailRecipients | Email addresses | 
-| pyEmailCriticality | Criticality id lookup | 
-| pyEmailRequestingServers | Python server names | 
-| pyEmailApplications | Application names | 
-| pyEmailImportance | Group and application relationship management | 
-| pyEmailSendGroupMembersConfig	| Manages send / no-send based on criticality per group and email recipient | 
+| EMAIL_REQ_TYPE | Email Mime Type | 
+| ALERT_METHOD_PRIORITY | Email Send Notification Type Priority | 
+| ALERT_SEQUENCE | Object Sequence Management | 
+| ALERT_SERVER_TBL | Server Mananagement Table | 
+| ALERT_REMOTE_SERVER | Remote Server Management Table | 
+| ALERT_NOTIF_PERSONS | Recipients Configuration Table | 
+| ALERT_NOTIF_GROUPS | Email Alert Group Management Table | 
+| ALERT_NOTIF_GROUP_MEMBERS | Email Group Membership Table | 
+| ALERT_NOTIF_GROUP_MEMBERS_TYPES | Email Group Membership Receipt Type | 
+| ALERT_MESSAGES | Alert Email History | 
+| ALERT_SESSION | Session ID Management | 
+| ALERT_EMAIL_CRITICALITY | Email criticality configuration | 
+| ALERT_EMAIL_METHOD | Default Email send type | 
+| ALERT_EMAIL_TEXTEVALS | Criticality categorical text configuration | 
 
 ### Stored Procedures:
 | Object Name | Purpose |
